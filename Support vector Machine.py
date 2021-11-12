@@ -1,606 +1,207 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Sep 20 22:41:00 2021
+Created on Tue Nov  9 14:30:07 2021
 
 @author: acer
 """
 
-                        
-                        # SUPPORT VECTOR MACHINE -
 
-# Support Vector Machine
 
-import pandas as pd
-import numpy as np
-dataset=pd.read_csv("letterdata.csv")
-dataset.shape
 
-dataset.info()
-
-dataset.head()
-
-dataset.tail()
-
-dataset.describe()
-
-x=dataset.drop("letter", axis=1)
-y=dataset["letter"]
-print(y)
-from sklearn.model_selection import train_test_split
-
-x_train, x_test, y_train, y_test=train_test_split(x, y, test_size=0.20, random_state=0)
-
-x_test.shape
-
-from sklearn.svm import SVC
-
-classifier=SVC(kernel='rbf', random_state=0)   #kernel thats change "sigmoid", "poly", "linear" & "rbf"=radial basis fun.
-
-classifier.fit(x_train, y_train)
-
-y_pred=classifier.predict(x_test)
-
-from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
-
-print(confusion_matrix(y_test, y_pred))
-
-print(classification_report(y_test, y_pred))
-
-print(accuracy_score(y_test, y_pred)*100)
-
-
-
-
-
-
-# K-NN(Nearest Neighbors)
-
-import pandas as pd
-import numpy as np
-
-dataset=pd.read_csv("wine.csv")
-
-dataset
-
-dataset.shape
-
-dataset.isnull().sum()
-
-dataset.head()
-
-dataset.tail()
-
-dataset.info()
-
-dataset.describe()
-
-x=dataset.drop("class", axis=1)
-y=dataset["class"]
-
-from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test=train_test_split(x, y, test_size=0.20, random_state=0)
-x_train.shape
-
-len(x_train)
-
-len(x_test)
-
-from sklearn.preprocessing import StandardScaler
-sc=StandardScaler()
-
-x_test_stand=sc.fit_transform(x_test)
-x_train_stand=sc.fit_transform(x_train)
-
-x_train_stand
-
-from sklearn.neighbors import KNeighborsClassifier
-classifier=KNeighborsClassifier(n_neighbors=11)
-classifier.fit(x_train, y_train)
-y_pred=classifier.predict(x_test)
-
-from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
-
-print(confusion_matrix(y_test, y_pred))
-
-print(classification_report(y_test, y_pred))
-
-print(accuracy_score(y_test, y_pred)*100)
-
-# Apply Scaling
-
-from sklearn.preprocessing import StandardScaler
-
-sc=StandardScaler()
-
-x_train_stand=sc.fit_transform(x_train)
-
-x_test_stand=sc.fit_transform(x_test)
-
-x_train_stand
-
-from sklearn.neighbors import KNeighborsClassifier
-classifier=KNeighborsClassifier(n_neighbors=11)
-
-classifier.fit(x_train_stand, y_train)
-
-y_pred=classifier.predict(x_test_stand)
-
-from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
-
-print(confusion_matrix(y_test, y_pred))
-
-print(classification_report(y_test, y_pred))
-
-print(accuracy_score(y_test, y_pred)*100)
-
-
-
-
-
-#----------------------------------------------------------------------------------------------------------
-
-
-
-# SVM : Support Vector Machine
-# Supervised ML
-# Classification and Regression
-# No.of features (column) > no. of record ...high dimensional spaces
-# memory efficient 
-# diasdavtages: Overfitting Problems.
-# SVC : Support Vector Classifier
-
-# Where we use SVM Algorithm?
-# Ans: that time neaural data analysis at that time be used it.
-
-
-# importing the dataset
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-df=pd.read_csv('Social_Network_Ads.csv')
-print(df)
-
-# seperate out the input & output
-x=df.iloc[:, 2 :-1].values
-print(x)
-
-y=df.iloc[:, -1 :].value_counts()
-print(y)
-
-
-
-x[0:5]
-y[0:5]
-
-#standardization  (standard scaler)
-from sklearn.preprocessing import StandardScaler
-sc=StandardScaler()
-xx=sc.fit_transform(x)
-print(xx)
-
-from sklearn.model_selection  import train_test_split
-x_train, x_test, y_train, y_test=train_test_split(xx,y, test_size=0.20, random_state=0)
-x_train
-x_test
-y_train
-y_test
-
-
-#fitting the data
-from sklearn.svm import SVC
-classifier=SVC(kernel='linear')
-classifier.fit(x_train, y_train)
-
-
-#predict
-y_pred=classifier.predict(x_test)
-print(y_pred)
-
-
-#model Evalution
-from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
-print('This is Confusion matrix:',  confusion_matrix(y_test, y_pred))
-
-print(accuracy_score(y_test, y_pred)*100)
-
-print(classification_report(y_test, y_pred))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Project on Support Vector Machine
+# Importing the libraries
 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-data=pd.read_csv('Social_Network_Ads.csv')
-print(data)
-
-x=data.iloc[:, 2 : -1].values
-print(x)
-
-y=data.iloc[:, -1 :].values
-print(y)
-
-from sklearn.preprocessing import StandardScaler
-sc=StandardScaler()
-xx=sc.fit_transform(x)
-print(xx)
-
-from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test=train_test_split(xx,y,test_size=0.20, random_state=2)
-print(x_train.shape)
-print(y_train.shape)
-print(x_test.shape)
-print(y_test.shape)
-
-from sklearn.svm import SVC
-classifier=SVC(kernel='linear')
-model=classifier.fit(x_train, y_train)
-print(model)
-
-y_pred=classifier.predict(x_test)
-print(y_pred)
-
-
-
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
-print(confusion_matrix(y_test, y_pred))
-
-print(accuracy_score(y_test, y_pred)*100)
-
-print(classification_report(y_test, y_pred))
-
-
-
-import pandas as pd
-import numpy as np
-data=pd.read_csv('Social_Network_Ads.csv')
-print(data)
-
-x=data.iloc[:,2 : -1 ]
-print(x)
-
-
-y=data.iloc[:, -1 :]
-print(y)
-
-
-xx=data.iloc[:, 1 : 2]
-print(xx)
-
-
-from sklearn.preprocessing import LabelEncoder
-le= LabelEncoder()
-model=le.fit_transform(xx)
-print(model)
-
-ff=pd.DataFrame(model)
-print(ff)
-df=ff.rename(columns={0:'Gender'})
-print(df)
-
-jj=pd.concat([x, df], axis=1)
-print(jj)
-
-
-print(x_test.shape)
-from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test=train_test_split(jj,y, test_size=0.20, random_state=2)
-print(x_train.shape)
-
-
-print(y_train.shape)
-
-print(y_test.shape)
-
-
-from sklearn.svm import SVC
-classifier=SVC(kernel='linear')
-aa=classifier.fit(x_train, y_train)
-print(aa)
-
-y_pred=classifier.predict(x_test)
-print(y_pred)
-
-from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
-print(confusion_matrix(y_test, y_pred))
-
-print(classification_report(y_test, y_pred))
-
-print(accuracy_score(y_test, y_pred)*100)
-
-
-
-import pandas as pd
-import numpy as np
-data=pd.read_csv('wine.csv')
-print(data)
-
-
-
-x=data.iloc[:, 1 : -1]
-print(x)
-
-y=data.iloc[:, 0 :1]
-print(y)
-
-from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test=train_test_split(x,y, test_size=0.27, random_state=0)
-print(x_train.shape)
-
-
-print(y_train.shape)
-
-print(y_test.shape)
-
-print(x_test.shape)
-
-from sklearn.svm import SVC
-classifier=SVC(kernel='rbf')
-model=classifier.fit(x_train, y_train)
-print(model)
-
-y_pred=classifier.predict(x_test)
-print(y_pred)
-
-from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
-
-print(classification_report(y_test,y_pred))
-
-print(accuracy_score(y_test, y_pred)*100)
-
-print(confusion_matrix(y_test, y_pred))
-
-
-
-import pandas as pd
-import numpy as np
 import seaborn as sn
-data=pd.read_csv('Advertising.csv')
+data=pd.read_csv('C://Users/acer/Downloads//train.csv')
 print(data)
 
 
-x=data.iloc[:, 1 : -1]
-print(x)
+#Cehck the rows & Columns
+data.shape
 
-y=data.iloc[:, -1 :]
-print(y)
+#Access the begin data 
+data.head()
 
-sn.heatmap(data.corr(), annot=True, cmap='coolwarm')
-plt.show()
+# Access the end data
+data.tail()
 
-from sklearn.preprocessing import StandardScaler
-sc=StandardScaler()
-modelx=sc.fit_transform(x)
-print(modelx)
+#Describe index
+data.index
 
+# Check contain all rows fill or not?
+data.count()
 
-from sklearn.preprocessing import LabelEncoder
-le= LabelEncoder()
-modely=le.fit_transform(y)
-print(modely)
+#Check the Data-types & Sub Data types
+data.info()
 
-print(len(modely))
+# Stastical / Arithamatic Calculation
+data.describe()
 
-aa=modely.reshape(-1)
-print(aa)
-
-from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test=train_test_split(x, aa, test_size=0.20, random_state=1000)
-print(x_train.shape)
-
-print(x_test.shape)
-
-print(y_train.shape)
-
-print(y_test.shape)
+# Check the null values 
+data.isnull().sum()
 
 
-
-
-
-from sklearn.svm import SVC
-classifier=SVC(kernel='rbf')
-model=classifier.fit(x_train,y_train)
-print(model)
-
-y_pred=classifier.predict(x_test)
-print(y_pred)
-
-from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
-
-print(confusion_matrix(y_test, y_pred))
-
-print(classification_report(y_test, y_pred))
-
-print(accuracy_score(y_test, y_pred)*100)
-
-
-
-
-
-import pandas as pd
-import numpy as np
-data=pd.read_csv('wisc_bc_data.csv')
-print(data)
-
-
-x=data.iloc[:, 2 : -1]
-print(x)
-
-y=data.iloc[:, -1 :]
-print(y)
-
-from sklearn.preprocessing import StandardScaler
-sc=StandardScaler()
-jj=sc.fit_transform(y)
-print(jj)
-
-from sklearn.preprocessing import Binarizer
-bi=Binarizer(threshold=3.5)
-oo=bi.fit_transform(jj)
-print(oo)
-
-
-from sklearn.preprocessing import LabelEncoder
-le=LabelEncoder()
-kk=data.apply(le.fit_transform)
-print(kk)
-
-from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test=train_test_split(kk,oo, test_size=0.33, random_state=7)
-print(x_train.shape)
-
-print(x_test.shape)
-
-print(y_train.shape)
-
-print(y_test.shape)
-
-from sklearn.svm import SVC
-classifier=SVC(kernel='rbf')
-model=classifier.fit(x_train, y_train)
-print(model)
-
-y_pred=model.predict(x_test)
-print(y_pred)
-
-
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
-
-print( accuracy_score(y_test, y_pred)*100)
-
-print(confusion_matrix(y_test,y_pred))
-
-print(classification_report(y_test, y_pred))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
-data=pd.read_csv('petrol_consume.csv')
-print(data)
-
-
+# All data Splitting.
+#Spitting the data into independent  variables.
 x=data.iloc[:, : -1]
 x
 
+# Check the contain value in column label of 'Blue'.
+x['blue'].value_counts()
+
+
+# Check the contain value in column label of 'wifi'.
+x['wifi'].value_counts()
+
+x.info()
+
+
+# Spitting the data into dependent variable.
 y=data.iloc[:, -1 :]
 y
 
 
+# Check the contain value in column label of 'price_range'.
+y['price_range'].value_counts()
+
+y.info()
+
+# Converting the integer data into Category data.
+y['price_range']=y['price_range'].astype('category')
+y['price_range'].head()
+
+
+
+
+#Visualization the data with Co-relation.
+sn.heatmap(data.corr(), annot=True, cmap='coolwarm')
+plt.show()
+
+
+sn.lineplot(x['battery_power'], x['blue'], color='lightblue')
+plt.show()
+
+
+sn.scatterplot(x['battery_power'], x['blue'], color='red')
+plt.show()
+
+
+sn.barplot(y['price_range'], x['battery_power'])
+plt.show()
+
+
+
+sn.boxplot(y['price_range'], x['battery_power'])
+plt.show()
+
+
+
+sn.violinplot(y['price_range'], x['battery_power'])
+plt.show()
+
+
+
+# Spitting the data Training & Testing process
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test=train_test_split(x,y,test_size=0.20, random_state=7)
+x_train, x_test, y_train, y_test=train_test_split(x,y, test_size=0.10, random_state=7)
 x_train.shape
 
-x_test.shape
-
 y_train.shape
+
+
+x_test.shape
 
 y_test.shape
 
 
+# Compare the independent variable training data & independent variable testing data respectively.
+
+sn.pairplot(x_train)
+plt.show()
+
+
+sn.pairplot(x_test)
+plt.show()
+
+
+# Fitting the Algorithm of best accuarcy.
 from sklearn.svm import SVC
-svm=SVC(kernel='rbf')
+rn=SVC(kernel='poly')   #rbf=94.5 & poly=96.5
+model=rn.fit(x_train, y_train)
+print(model)
+
+
+# Predict the model
+y_pred=model.predict(x_test)
+print(y_pred)
+
+
+
+# Calculate the Accuarcy , confusion matrix and  Classification_report
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, recall_score
+print(accuracy_score(y_test, y_pred)*100)
+
+print(confusion_matrix(y_test, y_pred))
+
+print(classification_report(y_test, y_pred))
+
+print(recall_score(y_test, y_pred, average='weighted')*100)
+
+
+# Visualization independent & dependent variable data.
+plt.plot(y_test, y_pred, color='red',lw=4, label='Accuracy_of_model')
+plt.xlabel('Independent_Variables')
+plt.ylabel('Price_Range')
+plt.title('Info_of_Mobile')
+plt.legend(loc='upper left', shadow=True)
+plt.show()
+
+
+
+# plot the graph on predict data.
+
+plt.scatter(x_test['battery_power'], y_test, color='red', label='battery_power')
+
+plt.scatter(x_test['blue'], y_test, color='black',lw=3, label='blue')
+
+plt.scatter(x_test['clock_speed'], y_test, color='green',lw=3, label='clock_speed')
+
+plt.scatter(x_test['dual_sim'], y_test, color='orange', label='dual_sim')
+
+plt.scatter(x_test['fc'], y_test, color='lightblue', label='fc')
+
+plt.scatter(x_test['four_g'], y_test, color='gray', label='four_g')
+
+plt.scatter(x_test['int_memory'], y_test, color='pink', label='int_memory')
+
+plt.scatter(x_test['m_dep'], y_test, color='maroon', label='m_dep')
+
+plt.scatter(x_test['mobile_wt'], y_test, color='violet', label='mobile_wt')
+
+plt.scatter(x_test['n_cores'], y_test, color='silver', label='n_cores')
+
+plt.scatter(x_test['pc'], y_test, color='yellow', label='pc')
+
+plt.scatter(x_test['px_height'], y_test, color='cyan',lw=3, label='px_height')
+
+plt.scatter(x_test['px_width'], y_test, color='purple',lw=3, label='px_width')
+
+plt.plot(x_train, model.predict(x_train), color='lightblue', alpha=0.4)
+
+plt.xlabel('Independent_Variable')
+plt.ylabel('Dependent_Varibale = price_range')
+plt.title('Information_of_Mobile')
+plt.legend(loc='lower right', shadow=True, ncol=2)
+plt.show()
+
+
+
+
+
+
+
+
 
